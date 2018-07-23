@@ -20,7 +20,7 @@ This project will continue to use the C++ development environment you set up in 
  ```
 
  2. Import the code into your IDE like done in the [Controls C++ project](https://github.com/udacity/FCND-Controls-CPP#development-environment-setup)
- 
+
  3. You should now be able to compile and run the estimation simulator just as you did in the controls project
 
 
