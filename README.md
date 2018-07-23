@@ -235,7 +235,19 @@ For this project, you will need to submit:
    - `QuadController.cpp`
    - `config/QuadControlParams.txt`
 
- - a write up addressing all the points of the rubric
+# Project Report #
+
+### Determining the Standard Deviation of the GPS and Accelerometer Data ###
+
+This section presents a simulation of a hovering drone that is gathering data of its location through GPS readings and Accelerometer measurements every 0.1 seconds for 10 seconds.  When the simulation is closed, the data is written into a CSV file.  
+
+The drone starts with constants `MeasuredStdDev_GPSPosXY` and `MeasuredStdDev_AccelXY` which are set to arbitrary values that only encompass about 15% of the data points.  In a typical gaussian model, the bounds of the standard deviation encompass approximately 68% of data measurements.  
+
+I decided to write a simple [python script]('./config/log/stdDev.py') that read in the (around, because you have to close the simulation right at the 10 second mark or else the sim starts over and the data is rewritten) 100 data points and used numpy's `std()` function to easily find the points.  The values I found were `MeasuredStdDev_GPSPosXY = 0.7238769646678072` and `MeasuredStdDev_AccelXY = 0.510250864906941`.
+
+In the following link, the video will display the the drone simulation with two graphs of the GPS and Accelerometer measurements.  Each graph has two horizontal lines on either side of the x-axis which denotes the bounds of the standard deviation.  The percentage to the left of each graph denotes the amount of data points encompassed within the calculated standard deviation.  All tests pass for this scenario!
+
+https://gfycat.com/gifs/detail/CleverDisloyalEkaltadeta
 
 ## Authors ##
 
