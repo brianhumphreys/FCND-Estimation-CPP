@@ -249,6 +249,12 @@ In the following link, the video will display the the drone simulation with two 
 
 https://gfycat.com/gifs/detail/CleverDisloyalEkaltadeta
 
+***Success criteria:*** *The standard deviations accurately capture the value of approximately 68% of the respective measurements.*
+
+### Attitude Estimation ###
+
+
+
 ## Authors ##
 
 Thanks to Fotokite for the initial development of the project code and simulator.
