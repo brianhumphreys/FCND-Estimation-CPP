@@ -253,6 +253,12 @@ https://gfycat.com/gifs/detail/CleverDisloyalEkaltadeta
 
 ### Attitude Estimation ###
 
+*I am going to use pictures now instead of videos to proof my work due to the lower cost in memory*
+
+I implemented `UpdateIMU()` using the Quaternions class in the [Estimator](./src/Utility/QuadEstimatorEKF.cpp#L94-L113) and got the following output:
+
+![UpdateIMU](./animations/Update-IMU-Output.png)
+
 
 
 ## Authors ##
