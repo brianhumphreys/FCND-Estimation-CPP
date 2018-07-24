@@ -96,20 +96,19 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
   // (replace the code below)
   // make sure you comment it out when you add your own code -- otherwise e.g. you might integrate yaw twice
 
-    Quaternion<float> euler;
     Quaternion<float> q_t = EstimatedAttitude();
-    
+
     Quaternion<float> q_t_bar = q_t.IntegrateBodyRate(V3D(gyro.x, gyro.y, gyro.z), dtIMU);
 
     float predictedPitch = q_t_bar.Pitch();
     float predictedRoll = q_t_bar.Roll();
     ekfState(6) = q_t_bar.Yaw();
-    
+
     // normalize yaw to -pi .. pi
     if (ekfState(6) > F_PI) ekfState(6) -= 2.f*F_PI;
     if (ekfState(6) < -F_PI) ekfState(6) += 2.f*F_PI;
-    
-    
+
+
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   // CALCULATE UPDATE
@@ -170,6 +169,16 @@ VectorXf QuadEstimatorEKF::PredictState(VectorXf curState, float dt, V3F accel, 
   Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, curState(6));
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+
+    predictedState(0) += dt * predictedState(3);
+    predictedState(1) += dt * predictedState(4);
+    predictedState(2) += dt * predictedState(5);
+
+    V3F accel_world = attitude.Rotate_BtoI(accel);
+
+    predictedState(3) += accel_world.x * dt;
+    predictedState(4) += accel_world.y * dt;
+    predictedState(5) += (accel_world.z - CONST_GRAVITY) * dt;
 
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////

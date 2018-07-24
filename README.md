@@ -260,6 +260,14 @@ I implemented `UpdateIMU()` using the Quaternions class in the [Estimator](./src
 ![UpdateIMU](./animations/Update-IMU-Output.png)
 
 
+### Predict State ###
+
+To implement this method, I passed in the current state, delta time, and the acceleration and body rates.  The acceleration and body rates are measured by the sensors so they are referenced in the body frame.  To integrate the new states, i had to convert to the world/inertial frame.  I did this using a Quaternion in [QuadEstimatorEKF](./src/Utility/QuadEstimatorEKF.cpp#L171-L184)
+
+Scenario 8 produced the following output in the simulator:
+
+![UpdateIMU](./animations/Predict.png)
+
 
 ## Authors ##
 
