@@ -184,7 +184,6 @@ public:
 		}
 		return ret;
 	}
-
 	float& operator()(unsigned char r, unsigned char c)
 	{
 		assert(r<3 && c<3);

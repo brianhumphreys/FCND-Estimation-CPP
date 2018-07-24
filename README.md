@@ -266,7 +266,17 @@ To implement this method, I passed in the current state, delta time, and the acc
 
 Scenario 8 produced the following output in the simulator:
 
-![UpdateIMU](./animations/Predict.png)
+![prediction](./animations/Predict.png)
+
+### Jacobians and Transition Function ###
+
+In Scenario 9, the covariances of multiple drones are measured.  Before implementing the Transition function that updates the Covariance with each predict step, the predictions were stagnant, as can be seen by the outer white lines in each graph below:
+
+![stagnantCov](./animations/predict_cov_noisy.png)
+
+After implementing the transition function `Predict()` which utilizes the Rotation Matrix from the body frame to the world frame, the covariances updates to look like this:
+
+![updatingCov](./animations/covariance_predicted.png)
 
 
 ## Authors ##
