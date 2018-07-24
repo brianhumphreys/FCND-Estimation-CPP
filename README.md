@@ -278,9 +278,9 @@ After implementing the transition function `Predict()` which utilizes the Rotati
 
 ![updatingCov](./animations/covariance_predicted.png)
 
-  - `PredictState` implemented in [QuadEstimatorEKF](./src/Utility/QuadEstimatorEKF.cpp#L171-L184)
-  - `GetRbgPrime` implemented in [QuadEstimatorEKF](./src/Utility/QuadEstimatorEKF.cpp#L208-L223)
-  - `Predict` implemented in [QuadEstimatorEKF](./src/Utility/QuadEstimatorEKF.cpp#L266-L279)
+  - `PredictState` implemented in [QuadEstimatorEKF](./src/QuadEstimatorEKF.cpp#L171-L184)
+  - `GetRbgPrime` implemented in [QuadEstimatorEKF](./src/QuadEstimatorEKF.cpp#L208-L223)
+  - `Predict` implemented in [QuadEstimatorEKF](./src/QuadEstimatorEKF.cpp#L266-L279)
 
 
 ## Authors ##
