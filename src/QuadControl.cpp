@@ -344,3 +344,4 @@ VehicleCommand QuadControl::RunControl(float dt, float simTime)
 
 
     return GenerateMotorCommands(collThrustCmd, desMoment);
+}

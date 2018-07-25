@@ -294,6 +294,8 @@ In Scenario 10, I implemented `UpdateFromMag()` that takes in the measured yaw a
 
 ### GPS Update ###
 
+In this step, we were asked to turn off the ideal IMU measurements and switch to noisey measurements.  When I turned this ideal sensor off, the drone started acting crazy and would fly off wildly at radnom times.  This is because as time goes on, with out updates from the GPS to correct for error, the noise accumulates and causes the drone to drift from the path more and more.
+
 Scenario 11 passes with the following code:
 ```
 for(int i = 0; i < 6; i++) {
@@ -304,6 +306,12 @@ for(int i = 0; i < 6; i++) {
 Math was pulled from the Over leaf paper.  Once the hPrime matrix and current state vector have been built, the update function is called and the simulation output has the following effect:
 
 ![updatingMag](./animations/gps_update.png)
+
+### Controller Integration ###
+
+For the final step, I integrated my controller into the project.  It did not seem that I needed to retune parameters to get the tests to pass (although it could probably still be improved with some tuning and possibly even re implementing of the estimator).  Here is the final result:
+
+https://gfycat.com/FakePreciousAntarcticfurseal
 
 
 
