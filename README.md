@@ -292,6 +292,18 @@ In Scenario 10, I implemented `UpdateFromMag()` that takes in the measured yaw a
 
 ![updatingMag](./animations/mag_update.png)
 
+### GPS Update ###
+
+Scenario 11 passes with the following code:
+```
+for(int i = 0; i < 6; i++) {
+  zFromX(i) = ekfState(i);
+  hPrime(i,i) = 1;
+}
+```
+Math was pulled from the Over leaf paper.  Once the hPrime matrix and current state vector have been built, the update function is called and the simulation output has the following effect:
+
+![updatingMag](./animations/gps_update.png)
 
 
 

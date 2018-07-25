@@ -299,10 +299,10 @@ void QuadEstimatorEKF::UpdateFromGPS(V3F pos, V3F vel)
   //  - The GPS measurement covariance is available in member variable R_GPS
   //  - this is a very simple update
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-
-
-
-
+  for(int i = 0; i < 6; i++) {
+    zFromX(i) = ekfState(i);
+    hPrime(i,i) = 1;
+  }
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   Update(z, hPrime, R_GPS, zFromX);
@@ -345,6 +345,7 @@ void QuadEstimatorEKF::UpdateFromMag(float magYaw)
 // H: Jacobian of observation function evaluated at the current estimated state
 // R: observation error model covariance
 // zFromX: measurement prediction based on current state
+
 void QuadEstimatorEKF::Update(VectorXf& z, MatrixXf& H, MatrixXf& R, VectorXf& zFromX)
 {
   assert(z.size() == H.rows());
