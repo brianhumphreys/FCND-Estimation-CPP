@@ -262,11 +262,15 @@ I implemented `UpdateIMU()` using the Quaternions class in the [Estimator](./src
 
 ### Predict State ###
 
-To implement this method, I passed in the current state, delta time, and the acceleration and body rates.  The acceleration and body rates are measured by the sensors so they are referenced in the body frame.  To integrate the new states, i had to convert to the world/inertial frame.  I did this using a Quaternion in [QuadEstimatorEKF](./src/Utility/QuadEstimatorEKF.cpp#L171-L184)
+To implement this method, I passed in the current state, delta time, and the acceleration and body rates.  The acceleration and body rates are measured by the sensors so they are referenced in the body frame.  To integrate the new states, i had to convert to the world/inertial frame.  I did this using a Quaternion in [QuadEstimatorEKF](./QuadEstimatorEKF.cpp#L171-L184)
 
 Scenario 8 produced the following output in the simulator:
 
 ![prediction](./animations/Predict.png)
+
+I tuned parameters as such:
+  - `QPosXYStd = .02`
+  - `QVelXYStd = 0.2`
 
 ### Jacobians and Transition Function ###
 
@@ -278,9 +282,17 @@ After implementing the transition function `Predict()` which utilizes the Rotati
 
 ![updatingCov](./animations/covariance_predicted.png)
 
-  - `PredictState` implemented in [QuadEstimatorEKF](./src/QuadEstimatorEKF.cpp#L171-L184)
-  - `GetRbgPrime` implemented in [QuadEstimatorEKF](./src/QuadEstimatorEKF.cpp#L208-L223)
-  - `Predict` implemented in [QuadEstimatorEKF](./src/QuadEstimatorEKF.cpp#L266-L279)
+  - `PredictState` implemented in [QuadEstimatorEKF](./QuadEstimatorEKF.cpp#L171-L184)
+  - `GetRbgPrime` implemented in [QuadEstimatorEKF](./QuadEstimatorEKF.cpp#L208-L223)
+  - `Predict` implemented in [QuadEstimatorEKF](./QuadEstimatorEKF.cpp#L266-L279)
+
+### Magnetometer ###
+
+In Scenario 10, I implemented `UpdateFromMag()` that takes in the measured yaw angle, normalizes, builds an hPrime vector, and then updates the state.  The [implementation](./QuadEstimatorEKF.cpp#L325-L338) passes yaw error test of staying within 0.1 degrees of the true value.
+
+![updatingMag](./animations/mag_update.png)
+
+
 
 
 ## Authors ##
