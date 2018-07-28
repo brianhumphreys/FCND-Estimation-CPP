@@ -108,7 +108,6 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
     if (ekfState(6) > F_PI) ekfState(6) -= 2.f*F_PI;
     if (ekfState(6) < -F_PI) ekfState(6) += 2.f*F_PI;
 
-
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   // CALCULATE UPDATE
@@ -207,8 +206,8 @@ MatrixXf QuadEstimatorEKF::GetRbgPrime(float roll, float pitch, float yaw)
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
-   float theta = roll;
-   float phi = pitch;
+   float theta = pitch;
+   float phi = roll;
    float psi = yaw;
 
    RbgPrime(0,0) = -cos(theta)*sin(psi);
@@ -324,17 +323,27 @@ void QuadEstimatorEKF::UpdateFromMag(float magYaw)
   //  - The magnetomer measurement covariance is available in member variable R_Mag
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
+//    float current_yaw = ekfState(6);
+//    float diff = magYaw - current_yaw;
+//    if(diff < -F_PI) {
+//      current_yaw -= 2.f*F_PI;
+//    } else if (diff > F_PI) {
+//      current_yaw += 2.f*F_PI;
+//    }
+//
+//    zFromX(0) = current_yaw;
+//    hPrime(0, 6) = 1;
+    
     float current_yaw = ekfState(6);
     float diff = magYaw - current_yaw;
     if(diff < -F_PI) {
-      current_yaw -= 2.f*F_PI;
+        current_yaw -= 2.f*F_PI;
     } else if (diff > F_PI) {
-      current_yaw += 2.f*F_PI;
+        current_yaw += 2.f*F_PI;
     }
-
+    
     zFromX(0) = current_yaw;
     hPrime(0, 6) = 1;
-
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   Update(z, hPrime, R_Mag, zFromX);
